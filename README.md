@@ -1,50 +1,82 @@
-# Welcome to your Expo app 👋
+# Task Manager App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A modern, cross-platform task management application built with React Native and Expo. Manage your daily tasks with an intuitive interface and smooth user experience.
 
-## Get started
+## Features
 
-1. Install dependencies
+- **Task Management**: Create, read, mark complete, and delete tasks
+- **Offline Support**: Works without an internet connection
+- **Cross-Platform**: Runs on iOS, Android, and web
+- **Dark/Light Theme**: Built-in theme support
+- **Haptic Feedback**: Tactile response for better user interaction
+
+## Prerequisites
+
+- Node.js
+- npm or yarn
+- A mobile device with `Expo Go` app,
+
+or an emulator/simulator + android studio or xcode
+
+## Getting Started
+
+1. **Clone the repository**
 
    ```bash
+   git clone https://github.com/Sherif-jr/rn-task-mgr-app.git
+   cd rn-task-mgr-app
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   yarn
+   # or
    npm install
    ```
 
-2. Start the app
+3. **Start the development server**
 
    ```bash
-   npx expo start
+   yarn start
    ```
 
-In the output, you'll find options to open the app in a
+4. **Run the app**
+   - Scan the QR code with your device's camera (Expo Go app required)
+   - Press `i` for iOS simulator
+   - Press `a` for Android emulator
+   - Press `w` for web browser
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Project Structure
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+/app
+  /(tabs)         # Main tab navigation
+    tasks.tsx     # Tasks screen
+    settings.tsx  # App settings
+  _layout.tsx     # Root layout
+  modal.tsx       # Modal screens
+/components       # Reusable UI components
+/constants        # App constants and themes
+/hooks            # Custom React hooks
+/services         # API and service layer
+/utils            # Utility functions
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Third-Party Libraries
 
-## Learn more
+- **Expo**: Framework for building cross-platform apps
+- **Expo Router**: Routing and navigation (built on top of react-navigation)
+- **AsyncStorage**: Persistent storage for tasks
+- **React Native Reanimated**: Smooth animations and gestures
+- **Expo Haptics**: Haptic feedback for better UX
+- **Expo Vector Icons**: Beautiful icons for the UI
+- **React Native Gesture Handler**: Native gestures and touch handling
 
-To learn more about developing your project with Expo, look at the following resources:
+## Available Scripts
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- `yarn start`: Start the development server
+- `yarn android`: Run on Android
+- `yarn ios`: Run on iOS
+- `yarn web`: Run on web
+- `yarn lint`: Run ESLint
