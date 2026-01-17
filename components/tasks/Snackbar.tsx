@@ -1,6 +1,6 @@
 import { Colors } from "@/constants/theme";
 import { useThemeColor } from "@/hooks/use-theme-color";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Animated, Pressable, StyleSheet } from "react-native";
 import { ThemedText } from "../themed-text";
 
@@ -46,7 +46,7 @@ const Snackbar: React.FC<SnackbarProps> = ({
     }
   }, [visible, duration]);
 
-  const hideSnackbar = () => {
+  const hideSnackbar = useCallback(() => {
     Animated.timing(translateY, {
       toValue: 100,
       duration: 300,
@@ -54,7 +54,7 @@ const Snackbar: React.FC<SnackbarProps> = ({
     }).start(() => {
       setIsVisible(false);
     });
-  };
+  }, []);
 
   if (!isVisible) return null;
 

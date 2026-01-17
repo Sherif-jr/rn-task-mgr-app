@@ -1,5 +1,6 @@
 import { Colors } from "@/constants/theme";
 import { Task } from "@/types/task";
+import { Ionicons } from "@expo/vector-icons";
 import { useCallback } from "react";
 import {
   ActivityIndicator,
@@ -46,7 +47,12 @@ const TaskList: React.FC<TaskListProps> = ({
               <Text style={styles.emptyText}>Loading saved tasks...</Text>
             </View>
           ) : (
-            <Text style={styles.emptyText}>No tasks yet. Add one above!</Text>
+            <View style={styles.emptyTextContainer}>
+              <Ionicons name="pencil" size={60} color="#999" />
+              <Text style={styles.emptyText}>
+                No tasks yet. Type to add a new task!
+              </Text>
+            </View>
           )}
         </View>
       }
@@ -69,8 +75,12 @@ const styles = StyleSheet.create({
     padding: 20,
     height: "100%",
   },
+  emptyTextContainer: {
+    gap: 20,
+    alignItems: "center",
+  },
   emptyText: {
-    fontSize: 16,
+    fontSize: 14,
     color: "#999",
     textAlign: "center",
   },
