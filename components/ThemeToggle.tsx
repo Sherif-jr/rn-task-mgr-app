@@ -1,12 +1,12 @@
-import { useAppTheme } from '@/hooks/use-app-theme';
-import React from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useAppTheme } from "@/hooks/use-app-theme";
+import React from "react";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
-const THEME_OPTIONS = ['light', 'dark', 'system'] as const;
+const THEME_OPTIONS = ["light", "dark", "system"] as const;
 
 export function ThemeToggle() {
   const { theme, themeMode, setThemeMode } = useAppTheme();
-  
+
   return (
     <View style={styles.container}>
       {THEME_OPTIONS.map((mode) => (
@@ -18,11 +18,11 @@ export function ThemeToggle() {
           <Text
             style={[
               styles.optionText,
-              { color: theme === 'dark' ? '#fff' : '#000' },
+              { color: theme === "dark" ? "#fff" : "#000" },
               themeMode === mode && styles.selectedText,
             ]}
           >
-            {mode.charAt(0).toUpperCase() + mode.slice(1)}
+            {mode}
           </Text>
         </Pressable>
       ))}
@@ -32,8 +32,8 @@ export function ThemeToggle() {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
     padding: 16,
     gap: 8,
   },
@@ -42,17 +42,18 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
   },
   selectedOption: {
-    backgroundColor: '#0a7ea4',
-    borderColor: '#0a7ea4',
+    backgroundColor: "#0a7ea4",
+    borderColor: "#0a7ea4",
   },
   optionText: {
     fontSize: 14,
+    textTransform: "capitalize",
   },
   selectedText: {
-    color: '#fff',
-    fontWeight: '600',
+    color: "#fff",
+    fontWeight: "600",
   },
 });
