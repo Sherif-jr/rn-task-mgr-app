@@ -7,41 +7,38 @@ export class StorageError extends Error {
   }
 }
 
-export class StorageEntity<T extends { id: string }> {
+export class StorageEntity<T> {
   private storageKey: string;
-  private cache: T[] | null = null;
+  private cache: T | null = null;
   private writeLock = false;
 
   constructor(storageKey: string) {
     this.storageKey = storageKey;
   }
 
-  private async load(fresh: boolean = false): Promise<T[]> {
+  async load(fresh: boolean = false): Promise<T> {
     if (this.cache && !fresh) return this.cache;
 
     try {
       const raw = await AsyncStorage.getItem(this.storageKey);
       if (!raw) {
-        this.cache = [];
-        return [];
+        this.cache = null;
+        return null as T;
       }
 
       const parsed = JSON.parse(raw);
-      if (!Array.isArray(parsed)) {
-        throw new Error("Invalid storage format");
-      }
       this.cache = parsed;
       return parsed;
     } catch (err) {
       const error = new StorageError("Failed to read or parse storage");
       console.error(error);
-      this.cache = [];
-      return [];
+      this.cache = null;
+      return null as T;
     }
   }
 
-  /**this will overwrite the list */
-  async write(items: T[]): Promise<void> {
+  /**this will overwrite the current stored value */
+  async write(items: T): Promise<void> {
     if (this.writeLock) {
       //prevents concurrent
       await new Promise((resolve) => setTimeout(resolve, 5));
@@ -61,68 +58,7 @@ export class StorageEntity<T extends { id: string }> {
     }
   }
 
-  public async find(filters?: Partial<T>): Promise<T[]> {
-    const items = await this.load();
-    if (!filters) return [...items];
-
-    return items.filter((item) =>
-      Object.entries(filters).every(
-        ([key, value]) => item[key as keyof T] === value
-      )
-    );
-  }
-
-  public async create(item: T): Promise<T[]> {
-    const items = await this.load();
-
-    if (items.some((i) => i.id === item.id)) {
-      const error = new StorageError("ID already exists");
-      throw error;
-    }
-
-    const newItems = [...items, item];
-    await this.write(newItems);
-    return newItems;
-  }
-
-  public async update(
-    id: string,
-    updates: Partial<Omit<T, "id">>
-  ): Promise<T[]> {
-    const items = await this.load();
-    const index = items.findIndex((i) => i.id === id);
-
-    if (index === -1) {
-      const error = new StorageError("Item not found");
-      throw error;
-    }
-
-    const updatedItem = { ...items[index], ...updates };
-    const newItems = [...items];
-    newItems[index] = updatedItem;
-
-    await this.write(newItems);
-
-    return newItems;
-  }
-
-  public async delete(id: string): Promise<T[]> {
-    const items = await this.load();
-    const index = items.findIndex((i) => i.id === id);
-
-    if (index === -1) {
-      const error = new StorageError("Item not found");
-      throw error;
-    }
-
-    const deletedItem = items[index];
-    const newItems = items.filter((i) => i.id !== id);
-
-    await this.write(newItems);
-    return newItems;
-  }
-
-  public async refresh(): Promise<T[]> {
+  public async refresh(): Promise<T> {
     return this.load(true);
   }
 }
