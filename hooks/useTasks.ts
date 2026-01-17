@@ -25,7 +25,7 @@ export const useTasks = () => {
       try {
         const stored = await getTasks();
         if (isMounted) {
-          setTasks(stored);
+          setTasks(stored || []);
         }
       } catch (err) {
         console.error("Failed to load tasks", err);
