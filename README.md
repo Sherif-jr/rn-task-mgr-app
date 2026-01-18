@@ -4,7 +4,7 @@ A modern, cross-platform task management application built with React Native and
 
 ## Features
 
-- **Task Management**: Create, read, mark complete, and delete tasks
+- **Task Management**: Create, read, mark complete, and delete tasks (with undo option)
 - **Offline Support**: Works without an internet connection
 - **Cross-Platform**: Runs on iOS, Android, and web
 - **Dark/Light Theme**: Built-in theme support
@@ -80,3 +80,10 @@ or an emulator/simulator + android studio or xcode
 - `yarn ios`: Run on iOS
 - `yarn web`: Run on web
 - `yarn lint`: Run ESLint
+
+## Screenshots
+<img title="Screenshot 1" height="400" src="https://github.com/user-attachments/assets/2f5d6ef6-8fe9-447c-b826-0aa8f8779541" >
+<img title="Screenshot 2" height="400" src="https://github.com/user-attachments/assets/7233957b-906d-4d9d-92d0-73053f591997" >
+<img title="Screenshot 3" height="400" src="https://github.com/user-attachments/assets/f95b1187-5185-4c31-ad8b-adaa16aa317d" >
+<img title="Screenshot 4" height="400" src="https://github.com/user-attachments/assets/e43e42a3-e840-4448-8a2b-6de94c251850" >
+<img title="Screenshot 5" height="400" src="https://github.com/user-attachments/assets/a61ee0d0-1c21-4572-9c7c-473e15214512" >
